@@ -42,13 +42,13 @@ All the packages and functions are properly described at the beginning of each m
 
 ## Contributors, alphabetical <a name="people"></a>
 
-- [Angel Vazquez Flores](https://github.com/Angeldk16): Parameter optimisation
-- [Rafael Gutierrez Aguilar](rafagut@cinvestav.mx): conceived and designed research
-- [Karel Zapfe Aguilar](https://github.com/kzapfe): Author of the concept and source codes
-- [Isabel Romero Maldonado](https://github.com/LBitn): Codes and Data Analysis
+- [Angel Vazquez Flores](https://github.com/Angeldk16): Parameter optimisation, Test
 - Fransisco Victorio Santiago: Test and sugestions
-- Luis Ramos Gonzalez: Test and optimisation
+- [Isabel Romero Maldonado](https://github.com/LBitn): Codes and Data Analysis
 - Jorge Hernandez Garcia: Test and sugestions
+- [Karel Zapfe Aguilar](https://github.com/kzapfe): Author of the concept and source codes
+- Luis Ramos Gonzalez: Test and Optimisation
+- [Rafael Gutierrez Aguilar](rafagut@cinvestav.mx): Conceived and designed research
 ## Contact <a name="contact"></a>
 
 The PI are based at Department of Pharmacobiology, Centro de Investigación y Estudios Avanzados del Instituto Politécnico Nacional. Please contact the following e-mail:
