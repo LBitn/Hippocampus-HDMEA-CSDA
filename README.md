@@ -15,17 +15,20 @@ Using CSD analysis, a disjoint component analysis permits to dissect restricted 
 
 The following codes contain the methods described in the following article:
 
-Zapfe, K.W.P.*, Romero-Maldonado, I.*, Gutiérrez, R., High Resolution Detection of Stationary and Evolving 2D-Current Source Density within Neuronal Microcircuits.
+Zapfe, K.W.P., Romero-Maldonado, I., Gutiérrez, R., High Resolution Detection of Stationary and Evolving 2D-Current Source Density within Neuronal Microcircuits.
 
 Created with data extracted from High Density Multielectrode Arrays (HD-MEAs, 3Brain) using slices of rodent hippocampal tissue in mind.
 
 Step 00: data preprocessing. Conversion from HDF5 (brw) to jld (native julia) format and segmentation to improve data manageability.
+
 Step 01: Detection of recording errors and debugging of discontinuities in the signals.
+
 Step 02: Voltage to current flow conversion ( sink and sources ). Detection of centers of mass and tracing of center-of-mass trajectories.
+
 ACD: Detection of channels corresponding to viable tissue. Separation of channels providing physiological signal from noise.
 
 
-Since we believe publicly funded research code should be free and open, this code is released under GPL-3.0.
+This code is released under GPL-3.0.
 
 ### Supported systems <a name="systems"></a>
 
@@ -42,10 +45,10 @@ All the packages and functions are properly described at the beginning of each m
 - [Angel Vazquez Flores](https://github.com/Angeldk16): Parameter optimisation
 - [Rafael Gutierrez Aguilar](rafagut@cinvestav.mx): conceived and designed research
 - [Karel Zapfe Aguilar](https://github.com/kzapfe): Author of the concept and source codes
-- [Isabel Romero Maldonado](https://github.com/LBitn): Codes and ata Analysis
-- [Fransisco Victorio Santiago]: Test and sugestions
-- [Luis Ramos Gonzalez]: Test and optimisation
-- [Jorge Hernandez Garcia]: Test and sugestions
+- [Isabel Romero Maldonado](https://github.com/LBitn): Codes and Data Analysis
+- Fransisco Victorio Santiago: Test and sugestions
+- Luis Ramos Gonzalez: Test and optimisation
+- Jorge Hernandez Garcia: Test and sugestions
 ## Contact <a name="contact"></a>
 
 The PI are based at Department of Pharmacobiology, Centro de Investigación y Estudios Avanzados del Instituto Politécnico Nacional. Please contact the following e-mail:
