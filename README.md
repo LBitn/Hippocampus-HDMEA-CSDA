@@ -5,29 +5,26 @@ For the preliminary version of this code, please refer to https://github.com/kza
 
 ![CentersOfMassTrajectories](https://github.com/LBitn/Hippocampus-HDMEA-CSDA/blob/main/CentersOfMassTrajectories.gif)
 
---
-This methodology provides a means to define the center of mass of sinks and sources in time in high spatiotemporal resolution in brain slices, which can aid to infer information transmission.
+- This methodology provides a means to define the center of mass of sinks and sources in time in high spatiotemporal resolution in brain slices, which can aid to infer information transmission.
 Using CSD analysis, a disjoint component analysis permits to dissect restricted synaptic activation that is obscured by high voltage electrographic elements, as well as subthreshold activity, not overtly detected with voltage recordings, can be better defined and traced in a quantitative manner.
 
 ---
-**First Version, September 2024**
+*First Version, September 2024
 ---
-
-## Software for high density electrophysiology
 
 The following codes contain the methods described in the following article:
 
-Zapfe, K.W.P., Romero-Maldonado, I., Gutiérrez, R., High Resolution Detection of Stationary and Evolving 2D-Current Source Density within Neuronal Microcircuits.
+- Zapfe, K.W.P., Romero-Maldonado, I., Gutiérrez, R., High Resolution Detection of Stationary and Evolving 2D-Current Source Density within Neuronal Microcircuits.
 
 Created with data extracted from High Density Multielectrode Arrays (HD-MEAs, 3Brain) using slices of rodent hippocampal tissue in mind.
 
-Step 00: data preprocessing. Conversion from HDF5 (brw) to jld (native julia) format and segmentation to improve data manageability.
+-- Step 00: data preprocessing. Conversion from HDF5 (brw) to jld (native julia) format and segmentation to improve data manageability.
 
-Step 01: Detection of recording errors and debugging of discontinuities in the signals.
+-- Step 01: Detection of recording errors and debugging of discontinuities in the signals.
 
-Step 02: Voltage to current flow conversion ( sink and sources ). Detection of centers of mass and tracing of center-of-mass trajectories.
+-- Step 02: Voltage to current flow conversion ( sink and sources ). Detection of centers of mass and tracing of center-of-mass trajectories.
 
-ACD: Detection of channels corresponding to viable tissue. Separation of channels providing physiological signal from noise.
+-- ACD: Detection of channels corresponding to viable tissue. Separation of channels providing physiological signal from noise.
 
 
 This code is released under GPL-3.0.
@@ -50,8 +47,8 @@ All the packages and functions are properly described at the beginning of each m
 - Jorge Hernandez Garcia: Test and sugestions
 - [Karel Zapfe Aguilar](https://github.com/kzapfe): Author of the concept and source codes
 - Luis Ramos Gonzalez: Test and Optimisation
-- [Rafael Gutierrez Aguilar](rafagut@cinvestav.mx): Conceived and designed research
+- [Rafael Gutiérrez Aguilar](rafagut@cinvestav.mx): Conceived and designed research
 ## Contact <a name="contact"></a>
 
-The PI are based at Department of Pharmacobiology, Centro de Investigación y Estudios Avanzados del Instituto Politécnico Nacional. Please contact the following e-mail:
+Dr. R. Gutiérrez is based at Department of Pharmacobiology, Centro de Investigación y Estudios Avanzados del Instituto Politécnico Nacional. Please contact the following e-mail:
 rafagut@cinvestav.mx
