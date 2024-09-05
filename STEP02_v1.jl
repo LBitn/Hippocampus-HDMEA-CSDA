@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------------------- #
 #=
     Module STEP02_v1
-        ] add JLD2
+        ] add JLD2 StatsBase
         update
         precompile
         build
