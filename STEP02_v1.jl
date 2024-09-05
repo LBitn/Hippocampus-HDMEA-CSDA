@@ -225,8 +225,7 @@ end
 SigmaData( data ) = sqrt( 2 * log( length( data ) ) );
 
 """
-    GetCentersOfMass( CSD::Array{ Float64, 3 }, minchannels::Int, ϵ::Union{ Array, Real } = 0
-) → CMN::Dict{Int64, Array}, CMP::Dict{Int64, Array}
+    GetCentersOfMass( CSD::Array{ Float64, 3 }, minchannels::Int, ϵ::Union{ Array, Real } = 0 ) → CMN::Dict{Int64, Array}, CMP::Dict{Int64, Array}
         using MassCenters
         using StatsBase
 """
@@ -261,8 +260,7 @@ function GetCentersOfMass( CSD::Array{ Float64, 3 }, minchannels::Int, ϵ::Union
 end
 
 """
-    MassCenters( CSD::Array{ Float64, 3 }, t::Int, channels::Vector, minchannels::Int ) →
-centers::Matrix{Int64}
+    MassCenters( CSD::Array{ Float64, 3 }, t::Int, channels::Vector, minchannels::Int ) → centers::Matrix{Int64}
         centers = [ x y Ω ]; Cartesian coordinates and Weight
         using DisjointComponents
 """
@@ -449,8 +447,7 @@ function WeightSelection( Fr, min_weight )
 end
 
 """
-    AuxiliaryTrajectories( Tj, cms, tiempo, tol_dist, More, t_aux, tol_time,
-        allTjs, nTs, Tmin ) -> Chain, cms, More, t_aux, allTjs, nTs
+    AuxiliaryTrajectories( Tj, cms, tiempo, tol_dist, More, t_aux, tol_time, allTjs, nTs, Tmin ) -> Chain, cms, More, t_aux, allTjs, nTs
         using Velocities, DistanceVectors
 """
 function AuxiliaryTrajectories( Tj, cms, tiempo, tol_dist, More, t_aux, tol_time, allTjs, nTs,
