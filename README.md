@@ -1,12 +1,18 @@
 # Current Source Density Analisis for HD-MEA
+![License](https://img.shields.io/badge/License-GPL_3.0-blue)
+![Julia-1.10](https://img.shields.io/badge/Julia-1.10.x-green)
+![Julia-1.7](https://img.shields.io/badge/Julia-1.7.2-yellow)
+![Julia-1.9](https://img.shields.io/badge/Julia-1.9.x-red)
+![macOs](https://img.shields.io/badge/tested-macOs_Monterey-green)
+![Windows-10](https://img.shields.io/badge/tested-Windows_10-green)
+
 
 For the preliminary version of this code, please refer to https://github.com/kzapfe/CSDA
 
 
 ![CentersOfMassTrajectories](https://github.com/LBitn/Hippocampus-HDMEA-CSDA/blob/main/CentersOfMassTrajectories.gif)
 
-- This methodology provides a means to define the center of mass of sinks and sources in time in high spatiotemporal resolution in brain slices, which can aid to infer information transmission.
-Using CSD analysis, a disjoint component analysis permits to dissect restricted synaptic activation that is obscured by high voltage electrographic elements, as well as subthreshold activity, not overtly detected with voltage recordings, can be better defined and traced in a quantitative manner.
+- This methodology provides a means to define the center of mass of sinks and sources over time with high spatiotemporal resolution in brain slices, which can help infer transmission information. Using CSD analysis, a disjoint component analysis allows for the dissection of restricted synaptic activation, which is obscured by high-voltage electrographic elements. Additionally, subthreshold activity, not overtly detected in voltage recordings, can be better defined and quantitatively traced.
 
 ---
 *First Version, September 2024
@@ -33,22 +39,50 @@ This code is released under GPL-3.0.
 
 - this software was developed specifically for high density multielectrode arrays [3Brain](http://3brain.com/) BIOCAM X
 
-## How to use <a name="quickstart"></a>
 
-The code has been written and tested in Julia language, versions 1.7.2 and 1.10.2, using Jupyter Notebooks and free text editors, on several Linux distributions as well as on Windows 10.
+## Quick Start <a name="quickstart"></a>
+
+These notebooks and modules were developed and tested in Julia (versions 1.7.2 and 1.10.2) using Jupyter Notebooks and text editors, across Linux distributions and Windows 10. We recommend using Julia 1.10.x to ensure compatibility with the latest dependencies.
 
 All the packages and functions are properly described at the beginning of each module or notebook
+
+
+### Get Started
+
+* Install Julia 1.10.x
+
+Visit [julialang.org/download](https://julialang.org/downloads/#official_binaries_for_manual_download) to download and install Julia.
+> [!NOTE]
+> You can also check out Julia's previous versions at [julialang.org/downloads/oldreleases](https://julialang.org/downloads/oldreleases/).
+
+
+* Clone the repository
+
+```
+git clone https://github.com/LBitn/Hippocampus-HDMEA-CSDA.git
+cd Hippocampus-HDMEA-CSDA
+```
+
+* Install the dependencies
+
+Open Julia and run the following commands to install the Julia kernel package for Jupyter Notebooks:
+
+```
+using Pkg
+Pkg.add("IJulia");
+```
 
 ## Contributors, alphabetical <a name="people"></a>
 
 - [Angel Vazquez Flores](https://github.com/Angeldk16): Parameter optimisation, Test
-- Fransisco Victorio Santiago: Test and sugestions
+- [Francisco Victorio Santiago](https://github.com/IMFrankVS): Test and sugestions
 - [Isabel Romero Maldonado](https://github.com/LBitn): Codes and Data Analysis
-- Jorge Hernandez Garcia: Test and sugestions
+- [Jorge Antonio Hernández García](https://github.com/JorgeGarciaAH): Test and sugestions
 - [Karel Zapfe Aguilar](https://github.com/kzapfe): Author of the concept and source codes
-- Luis Ramos Gonzalez: Test and Optimisation
+- [Luis Reynaldo Ramos González](https://github.com/LuigiRA): Test and Optimisation
 - [Rafael Gutiérrez Aguilar](rafagut@cinvestav.mx): Conceived and designed research
 ## Contact <a name="contact"></a>
 
 Dr. R. Gutiérrez is based at Department of Pharmacobiology, Centro de Investigación y Estudios Avanzados del Instituto Politécnico Nacional. Please contact the following e-mail:
 rafagut@cinvestav.mx
+
