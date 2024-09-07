@@ -58,18 +58,25 @@ Visit [julialang.org/download](https://julialang.org/downloads/#official_binarie
 
 * Clone the repository
 
-```
+```bash
 git clone https://github.com/LBitn/Hippocampus-HDMEA-CSDA.git
-cd Hippocampus-HDMEA-CSDA
 ```
 
 * Install the dependencies
 
 Open Julia and run the following commands to install the Julia kernel package for Jupyter Notebooks:
 
-```
+```julia
 using Pkg
 Pkg.add("IJulia");
+```
+
+If you already have Jupyter on your computer, this process will add a Julia kernel for Jupyter. Then, you can start Jupyter Notebook as usual by running jupyter notebook in the terminal.
+> Alternatively, you can let IJulia install and manage its own Jupyter setup. To do this, type the following at the Julia
+
+```julia
+using IJulia
+notebook();
 ```
 
 ## Contributors, alphabetical <a name="people"></a>
