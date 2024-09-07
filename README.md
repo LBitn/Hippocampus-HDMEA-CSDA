@@ -10,12 +10,17 @@
 For the preliminary version of this code, please refer to https://github.com/kzapfe/CSDA
 
 
-![CentersOfMassTrajectories](https://github.com/LBitn/Hippocampus-HDMEA-CSDA/blob/main/CentersOfMassTrajectories.gif)
+<div align="center">
+<figure>
+    <img src="https://github.com/LBitn/Hippocampus-HDMEA-CSDA/blob/main/CentersOfMassTrajectories.gif" width="400" height="400" alt="Centers Of Mass Trajectories">
+</figure>
+<p align="center"><i>A figure that represents detection of centers of mass and tracing of center of mass trajectories</i>.</p>
+</div>
 
-- This methodology provides a means to define the center of mass of sinks and sources over time with high spatiotemporal resolution in brain slices, which can help infer transmission information. Using CSD analysis, a disjoint component analysis allows for the dissection of restricted synaptic activation, which is obscured by high-voltage electrographic elements. Additionally, subthreshold activity, not overtly detected in voltage recordings, can be better defined and quantitatively traced.
+This methodology provides a means to define the center of mass of sinks and sources over time with high spatiotemporal resolution in brain slices, which can help infer transmission information. Using CSD analysis, a disjoint component analysis allows for the dissection of restricted synaptic activation, which is obscured by high-voltage electrographic elements. Additionally, subthreshold activity, not overtly detected in voltage recordings, can be better defined and quantitatively traced.
 
 ---
-*First Version, September 2024
+## First Version, September 2024
 ---
 
 The following codes contain the methods described in the following article:
@@ -24,16 +29,16 @@ The following codes contain the methods described in the following article:
 
 Created with data extracted from High Density Multielectrode Arrays (HD-MEAs, 3Brain) using slices of rodent hippocampal tissue in mind.
 
--- Step 00: data preprocessing. Conversion from HDF5 (brw) to jld (native julia) format and segmentation to improve data manageability.
+- Step 00: data preprocessing. Conversion from HDF5 (brw) to jld (native julia) format and segmentation to improve data manageability.
 
--- Step 01: Detection of recording errors and debugging of discontinuities in the signals.
+- Step 01: Detection of recording errors and debugging of discontinuities in the signals.
 
--- Step 02: Voltage to current flow conversion ( sink and sources ). Detection of centers of mass and tracing of center-of-mass trajectories.
+- Step 02: Voltage to current flow conversion ( sink and sources ). Detection of centers of mass and tracing of center-of-mass trajectories.
 
--- ACD: Detection of channels corresponding to viable tissue. Separation of channels providing physiological signal from noise.
+- ACD: Detection of channels corresponding to viable tissue. Separation of channels providing physiological signal from noise.
 
 
-This code is released under GPL-3.0.
+_This code is released under GPL-3.0_.
 
 ### Supported systems <a name="systems"></a>
 
@@ -88,6 +93,8 @@ notebook();
 - [Karel Zapfe Aguilar](https://github.com/kzapfe): Author of the concept and source codes
 - [Luis Reynaldo Ramos González](https://github.com/LuigiRA): Test and Optimisation
 - [Rafael Gutiérrez Aguilar](rafagut@cinvestav.mx): Conceived and designed research
+
+
 ## Contact <a name="contact"></a>
 
 Dr. R. Gutiérrez is based at Department of Pharmacobiology, Centro de Investigación y Estudios Avanzados del Instituto Politécnico Nacional. Please contact the following e-mail:
