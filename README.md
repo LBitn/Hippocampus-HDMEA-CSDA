@@ -25,7 +25,7 @@ Using CSD analysis, a disjoint component analysis permits to dissect restricted 
 
 The following codes contain the methods described in the following article:
 
-- [Zapfe, K.W.P., Romero-Maldonado, I., Gutiérrez, R., High Resolution Detection of Stationary and Evolving 2D-Current Source Density within Neuronal Microcircuits.]()
+- Zapfe, K.W.P., Romero-Maldonado, I., Gutiérrez, R., High Resolution Detection of Stationary and Evolving 2D-Current Source Density within Neuronal Microcircuits, 2024. (under review for publication)
 
 Created with data extracted from High Density Multielectrode Arrays (HD-MEAs, 3Brain) using slices of rodent hippocampal tissue in mind.
 
@@ -42,7 +42,7 @@ _This code is released under GPL-3.0_.
 
 ### Supported systems <a name="systems"></a>
 
-- this software was developed specifically for high density multielectrode arrays [3Brain](http://3brain.com/) BIOCAM X
+- This software was developed specifically for high density multielectrode arrays [3Brain](http://3brain.com/) BIOCAM X
 
 
 ## Quick Start <a name="quickstart"></a>
@@ -92,7 +92,7 @@ notebook();
 - [Jorge Antonio Hernández García](https://github.com/JorgeGarciaAH): Test and sugestions
 - [Karel Zapfe Aguilar](https://github.com/kzapfe): Author of the concept and source codes
 - [Luis Reynaldo Ramos González](https://github.com/LuigiRA): Test and Optimisation
-- [Rafael Gutiérrez Aguilar]: Conceived and designed research
+- Rafael Gutiérrez Aguilar: Conceived and designed research
 
 
 ## Contact <a name="contact"></a>
@@ -100,3 +100,4 @@ notebook();
 Dr. R. Gutiérrez is based at Department of Pharmacobiology, Centro de Investigación y Estudios Avanzados del Instituto Politécnico Nacional. Please contact the following e-mail:
 rafagut@cinvestav.mx
 
+## References
