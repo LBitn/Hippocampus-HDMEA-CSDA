@@ -1,7 +1,7 @@
 # ----------------------------------------------------------------------------------------- #
 #=
     Module STEP02_v1
-        ] add JLD2 StatsBase
+        ] add JLD2 StatsBase BinningAnalysis HistogramThresholding Suppressor
         update
         precompile
         build
@@ -17,6 +17,9 @@ module STEP02_v1
 # ----------------------------------------------------------------------------------------- #
 using JLD2
 using StatsBase
+using BinningAnalysis
+using HistogramThresholding
+using Suppressor
 # ----------------------------------------------------------------------------------------- #
 
 # ----------------------------------------------------------------------------------------- #
@@ -32,6 +35,8 @@ export FixingGaps
 export StartStop
 export DonohoMatrix3D
 export SigmaData
+export minCMweight
+export DistanceCoords
 # ----------------------------------------------------------------------------------------- #
 
 # ----------------------------------------------------------------------------------------- #
@@ -289,7 +294,7 @@ function MassCenters( CSD::Array{Float64, 3}, t::Int, channels::Vector, minchann
 end
 
 """
-    DisjointComponents( CartesianChannels::Vector{ Array } ) → componentes::Set{ Any }
+    DisjointComponents( CartesianChannels::Vector{ Array } ) → components::Set{ Any }
         using EightNeigh
 """
 function DisjointComponents( CartesianChannels::Vector{ Array{ Int16 } } )
@@ -358,7 +363,7 @@ function DistanceCoords( x, y )
 end
 
 """
-    Trajectories( CM, tol_dist, tol_time, Tmin, min_weight )
+    Trajectories( CM, tol_dist, tol_time, Tmin, min_weight ) → allTjs
         using WeightSelection
         using AuxiliaryTrajectories
 """
@@ -432,7 +437,7 @@ function Trajectories( CM, tol_dist, tol_time, Tmin, min_weight )
 end
 
 """
-    WeightSelection( Fr, min_weight ) -> good_ones::Int
+    WeightSelection( Fr, min_weight ) → good_ones::Int
 """
 function WeightSelection( Fr, min_weight )
     NF = size( Fr )[ 1 ];
@@ -447,7 +452,7 @@ function WeightSelection( Fr, min_weight )
 end
 
 """
-    AuxiliaryTrajectories( Tj, cms, tiempo, tol_dist, More, t_aux, tol_time, allTjs, nTs, Tmin ) -> Chain, cms, More, t_aux, allTjs, nTs
+    AuxiliaryTrajectories( Tj, cms, tiempo, tol_dist, More, t_aux, tol_time, allTjs, nTs, Tmin ) → Chain, cms, More, t_aux, allTjs, nTs
         using Velocities, DistanceVectors
 """
 function AuxiliaryTrajectories( Tj, cms, tiempo, tol_dist, More, t_aux, tol_time, allTjs, nTs,
@@ -497,7 +502,7 @@ Tmin )
 end
 
 """
-    Velocities( Tjs, Locs, Fr ) -> V, ΔT
+    Velocities( Tjs, Locs, Fr ) → V, ΔT
         using DistanceCoords
 """
 function Velocities( Tjs, Locs, Fr )
@@ -510,7 +515,7 @@ function Velocities( Tjs, Locs, Fr )
 end
 
 """
-    FixingGaps( Tjs, Starts, Stops ) -> Tjs
+    FixingGaps( Tjs, Starts, Stops ) → Tjs
 """
 function FixingGaps( Tjs, Starts, Stops )
     for i in 1:length( Tjs )
@@ -540,7 +545,7 @@ function FixingGaps( Tjs, Starts, Stops )
 end
 
 """
-    StartStop( Tjs ) -> t0, tN
+    StartStop( Tjs ) → t0, tN
 """
 function StartStop( Tjs )
     t0 = Dict{ Int, Float64 }( );
@@ -552,6 +557,154 @@ function StartStop( Tjs )
         tN[ i ] = Tjs[ i ][ end, end ];
     end
     return t0, tN
+end
+
+"""
+    Thresholding( aux::VecOrMat ) → t::vec
+        using BinningAnalysis, StatsBase, HistogramThresholding, Suppressor
+        using Donoho, SigmaData, Fences
+"""
+function Thresholding( aux::VecOrMat )
+    W = round.( vec( Float64.( aux ) ), digits = 3 );
+    t = zeros( 19 );
+    @suppress begin
+        xmean, xerror = jackknife( identity, W );
+        t[ 1 ] = Donoho( W ) * SigmaData( W );
+        t[ 2 ] = mean( W ) + ( 2 * std( W ) );
+        t[ 3 ] = mean( W ) - ( 2 * std( W ) );
+        t[ 4 ], t[ 5 ] = Fences( W );
+        try t[ 6 ] = find_threshold( W, Balanced( ) ); catch e; end
+        try t[ 7 ] = find_threshold( W, Entropy( ) ); catch e; end
+        try t[ 8 ] = find_threshold( W, Intermodes( ) ); catch e; end
+        try t[ 9 ] = find_threshold( W, MinimumError( ) ); catch e; end
+        try t[ 10 ] = find_threshold( W, MinimumIntermodes( ) ); catch e; end
+        try t[ 11 ] = find_threshold( W, Moments( ) ); catch e; end
+        try t[ 12 ] = find_threshold( W, Otsu( ) ); catch e; end
+        try t[ 13 ] = find_threshold( W, UnimodalRosin( ) ); catch e; end
+        try t[ 14 ] = find_threshold( W, Yen( ) ); catch e; end
+        t[ 15 ] = xmean + xerror;
+        t[ 16 ] = xmean - xerror;
+        t[ 17 ] = percentile( W, 0.33 );
+        t[ 18 ] = median( W ) + xerror;
+        t[ 19 ] = median( W ) - xerror;
+    end
+    l, h = extrema( W );
+    t = t[ h .>= t .>= l ];
+    t = sort( unique( t ) );
+    return t
+end
+
+"""
+    Fences( data::Vector ) → LowerFence::Real, HigherFence::Real
+        Simple test for Outliers
+            using StatsBase
+"""
+function Fences( data::Vector )
+    Q1 = quantile( data, 0.25 );
+    Q3 = quantile( data, 0.75 );
+    IQR = Q3 - Q1;
+    LF = Q1 - 1.5*IQR;
+    HF = Q3 + 1.5*IQR;
+    return LF, HF
+end
+
+"""
+    Donoho( x ) = ( median( abs.( x ) ) / 0.6745 )
+        using StatsBase
+"""
+Donoho( x ) = ( median( abs.( x ) ) / 0.6745 );
+
+"""
+    SigmaData( data ) = sqrt( 2 * log( length( data ) ) ) → σ::Real
+"""
+SigmaData( data ) = sqrt( 2 * log( length( data ) ) );
+
+"""
+    CleanDictionary( D::Dict ) → D::Dict
+        Removes specific types of entries from a dictionary. It deletes entries based on the value's content, excluding those with Symbol type values.
+
+        **Purpose**: This function cleans a dictionary by removing entries where:
+        - The value is the string "null".
+        - The value is an empty string.
+        - The value is an empty array.
+        - The value is a default empty value obtained from `get()` (when a key might not exist).
+
+        `Symbol` type values are preserved and not processed or removed.
+
+        **Inputs**:
+        - `D`: A dictionary where the function examines each entry and applies the cleanup criteria.
+
+        **Outputs**:
+        - `D`: The cleaned dictionary with irrelevant or empty entries removed.
+
+        **Requirements**:
+        - **None**: The function uses basic Julia operations and does not require any external packages.
+"""
+function CleanDictionary( D::Dict )
+    # Iterate over each key in the dictionary
+    for k in keys( D )
+        # Skip processing if the value is of type Symbol
+        if typeof( D[ k ] ) == Symbol
+            continue
+        else
+            # Check conditions for removal:
+            # Value is the string "null"
+            c1 = D[ k ] == "null";
+            # Value is an empty string
+            c2 = D[ k ] == "";
+            # Value is an empty array (for array types)
+            c3 = isempty( D[ k ] );
+            # Value is a default empty array obtained from `get()`
+            c4 = isempty( get( D, k, [ ] ) );
+            # If any condition is met, delete the entry from the dictionary
+            if c1 || c2 || c3 || c4
+                delete!( D, k )
+            end
+        end
+    end
+    # Return the cleaned dictionary
+    return D
+end
+
+"""
+    DepurationXDistance( ACD::Vector{Int64}, CM::Dict, mindistance::Real ) → allcms::Dict
+        using DistanceVectors
+"""
+function DepurationXDistance( ACD::Vector{Int64}, CM::Dict, mindistance::Real )
+    Layout = Array( reshape( 1:4096, 64, 64 )' );
+    aux = findall( Layout .∈ [ ACD ] );
+    M = getindex.( aux, [ 1 2 ] );
+    allcms = Dict( )
+    for key in keys( CM )
+        cms = [ ];
+        for i = 1:length( CM[ key ][ :, 3 ] )
+            CMS = CM[ key ][ i, 1:2 ];
+            aux = DistanceVectors( CMS, M );
+            temp = findall( aux .<= mindistance );
+            if !isempty( temp )
+                push!( cms, CM[ key ][ i, : ] );
+            end
+        end
+        cms = Array( vcat( cms... )' );
+        cms = reshape( cms, Int( length( cms ) / 3 ), 3 );
+        allcms[ key ] = cms;
+    end
+    return allcms
+end
+"""
+    minCMweight( CM, ACD, mindistance ) → min_weight::Real
+        # Custom
+        using CleanDictionary, DepurationXDistance, Thresholding
+"""
+function minCMweight( CM, ACD, mindistance )
+    OCM = deepcopy( CM );
+    nCM = Dict( CleanDictionary( OCM ) );
+    nCM = DepurationXDistance( ACD, nCM, mindistance ); # Only near-tissue cms
+    V = vcat( collect( values( nCM ) )...)[ :, 3 ];
+    ts = abs.( Thresholding( V ) );
+    _, its = findmax( diff( log.( ts ) ) ); # most significant change in order of magnitude
+    thr = ts[ its + 1 ];
+    return thr
 end
 # ----------------------------------------------------------------------------------------- #
 
