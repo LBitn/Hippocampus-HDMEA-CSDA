@@ -29,13 +29,13 @@ The following codes contain the methods described in the following article:
 
 Created with data extracted from High Density Multielectrode Arrays (HD-MEAs, 3Brain) using slices of rodent hippocampal tissue in mind.
 
-- [Step 00: data preprocessing. Conversion from HDF5 (brw) to jld (native julia) format and segmentation to improve data manageability.](docs/STEP00_v1.jl)
+- [Step 00: data preprocessing. Conversion from HDF5 (brw) to jld (native julia) format and segmentation to improve data manageability.](https://github.com/LBitn/Hippocampus-HDMEA-CSDA/blob/main/STEP00_v1.ipynb)
 
-- [Step 01: Detection of recording errors and debugging of discontinuities in the signals.](docs/STEP01_v1.jl)
+- [Step 01: Detection of recording errors and debugging of discontinuities in the signals.](https://github.com/LBitn/Hippocampus-HDMEA-CSDA/blob/main/STEP01_v1.ipynb)
 
-- [Step 02: Voltage to current flow conversion ( sink and sources ). Detection of centers of mass and tracing of center-of-mass trajectories.](docs/STEP02_v1.jl) 
+- [Step 02: Voltage to current flow conversion ( sink and sources ). Detection of centers of mass and tracing of center-of-mass trajectories.](https://github.com/LBitn/Hippocampus-HDMEA-CSDA/blob/main/STEP02_v1.ipynb)
 
-- [ACD: Detection of channels corresponding to viable tissue. Separation of channels providing physiological signal from noise.](docs/ACD.jl)
+- [ACD: Detection of channels corresponding to viable tissue. Separation of channels providing physiological signal from noise.](https://github.com/LBitn/Hippocampus-HDMEA-CSDA/blob/main/ACD.ipynb)
 
 
 _This code is released under GPL-3.0_.
