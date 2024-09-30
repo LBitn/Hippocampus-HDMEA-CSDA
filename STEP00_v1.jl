@@ -20,7 +20,8 @@ validated by the development team.
 
 ##Instalation
 
-- For installing the needed native packages, these are commands to run in the Julia REPL or a Julia script:
+- For installing the needed native packages, these are commands to run in the Julia REPL or a
+    Julia script:
 
         >>
         using Pkg
