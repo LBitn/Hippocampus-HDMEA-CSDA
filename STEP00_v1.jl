@@ -72,7 +72,7 @@ export GetVarsHDF5
 export GetChunkSize
 export OneSegment
 export Digital2Analogue
-export SupThr
+export SupInfThr
 export UniqueCount
 export STDΔV
 export ms2frs
@@ -944,7 +944,7 @@ function Digital2Analogue( Variables::Dict, DigitalValue::Matrix{ UInt16 } )
 end
 
 """
-    SupThr( Data::Array, Thr::Real ) → Cols::Vector, Rows::Vector
+    SupInfThr( Data::Array, Thr::Real ) → Cols::Vector, Rows::Vector
         Identifies the columns and rows of values in the array that are above a specified
         threshold or below its negative counterpart. The result is organized by columns and
         rows where the values exceed the threshold.
@@ -968,7 +968,7 @@ end
         - **None**: The function uses basic Julia operations and does not require any
         external packages.
 """
-function SupThr( Data::Array, Thr::Real )
+function SupInfThr( Data::Array, Thr::Real )
     # Find indices of elements in the array where the absolute value is greater than or equal
     # to the threshold
     ST = findall( abs.( Data ) .>= Thr );
