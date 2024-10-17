@@ -971,10 +971,10 @@ end
 function SupInfThr( Data::Array, Thr::Real )
     # Find indices of elements in the array where the absolute value is greater than or equal
     # to the threshold
-    ST = findall( abs.( Data ) .>= Thr );
+    SIT = findall( abs.( Data ) .>= Thr );
     # Extract column and row indices from the positions found
-    AllCols = getindex.( ST, [ 1 ] );
-    AllRows = getindex.( ST, [ 2 ] );
+    AllCols = getindex.( SIT, [ 1 ] );
+    AllRows = getindex.( SIT, [ 2 ] );
     # Initialize vectors to store unique columns and corresponding rows
     Rows = [ ];
     Cols = [ ];
