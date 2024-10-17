@@ -423,7 +423,7 @@ end
 """
 function Abs2RelPath( D::Dict )
     # Initialize an empty dictionary to store the new key-value pairs with relative paths.
-    ND = Dict{String, Any}();
+    ND = Dict{ String, Any }( );
     # Extract all keys from the original dictionary.
     K = keys( D );
     # Iterate over each key in the original dictionary.
@@ -524,10 +524,10 @@ function ExpSett2Dict( Variables::Dict )
         # Split each remaining line by the colon and space delimiter.
         t = split.( t, ": " );
         # Initialize an empty dictionary to store the extracted key-value pairs.
-        D = Dict{String, Any}();
+        D = Dict{ String, Any }( );
         # Process each key-value pair extracted from the settings string.
         for i in t
-            if i[2] != ""
+            if i[ 2 ] != ""
                 # Remove unwanted characters (commas, brackets, and spaces) from the value.
                 aux = replace( i[ 2 ], r",|\[|\]|\[\]| " => "" );
                 if aux != ""
@@ -731,7 +731,7 @@ function GetVarsHDF5( FILEBRW::String )
     println( "File: ", replace( BRW.filename, homedir( ) => "~" ) );
     println( "Description: ", Variables[ "Description" ] );
     println( "HDF5 file size: $filesize GB, corresponding to $BRWTIME seconds" );
-    println( "Date of Analysis: ", right_now(), " by ", basename( homedir() ) );
+    println( "Date of Analysis: ", right_now( ), " by ", basename( homedir( ) ) );
     println( "You are now working on the new main path: ", PATHMAIN );
     println( seg0, "--------", segN );
     # Capture the report output.
@@ -740,8 +740,8 @@ function GetVarsHDF5( FILEBRW::String )
         println( "File: ", replace( BRW.filename, homedir( ) => "~" ) );
         println( "Description: ", Variables[ "Description" ] );
         println( "HDF5 file size: $filesize GB, corresponding to $BRWTIME seconds" );
-        println( "Date of Analysis: ", right_now(), " by ", basename( homedir( ) ) );
-        println( "With:\n", string( basename( homedir() ), "@", gethostname( ) ) );
+        println( "Date of Analysis: ", right_now( ), " by ", basename( homedir( ) ) );
+        println( "With:\n", string( basename( homedir( ) ), "@", gethostname( ) ) );
         versioninfo( );
         println( seg0, "--------", segN );
     end
